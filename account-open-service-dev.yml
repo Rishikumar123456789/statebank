@@ -3,10 +3,10 @@ server:
 
 spring:
   application:
-    name: statebank-account-open-service
+    name: account-open-service
 
   datasource:
-    url: jdbc:mysql://localhost:3306/statebank
+    url: jdbc:mysql://localhost:3306/account_open_service_dev
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
