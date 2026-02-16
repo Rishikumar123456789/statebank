@@ -1,0 +1,94 @@
+# ================= GLOBAL CONFIG =================
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.springframework.cloud: INFO
+
+spring:
+  jackson:
+    default-property-inclusion: non_null
+    serialization:
+      indent_output: true
+
+server:
+  error:
+    include-message: always
+    include-binding-errors: always
+
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
+  timelimiter:
+    configs:
+      default:
+        timeoutDuration: 5s
+
+info:
+  app:
+    name: State Bank Microservices
+    version: 1.0.0
+
+
+# ================= DEV PROFILE CONFIG =================
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+  kafka:
+    bootstrap-servers: ec2-13-203-157-122.ap-south-1.compute.amazonaws.com:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.add.type.headers: false
+    consumer:
+      group-id: bank-group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      auto-offset-reset: earliest
+      properties:
+        spring.json.trusted.packages: "*"
+
+  cloud:
+    config:
+      fail-fast: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
+
+logging:
+  level:
+    org.springframework.cloud: DEBUG
+    com.netflix.discovery: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  tracing:
+    sampling:
+      probability: 1.0
+
