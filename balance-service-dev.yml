@@ -1,0 +1,32 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: balance-service
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/balance_service_dev
+    username: root
+    password: Rishikumar12346
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+# Actuator for monitoring
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+# Eureka instance details
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${random.value}
