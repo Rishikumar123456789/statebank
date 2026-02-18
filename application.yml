@@ -51,7 +51,7 @@ spring:
       on-profile: dev
 
   kafka:
-    bootstrap-servers: ec2-43-204-147-62.ap-south-1.compute.amazonaws.com:9092
+    bootstrap-servers: ec2-3-108-252-252.ap-south-1.compute.amazonaws.com:9092
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
