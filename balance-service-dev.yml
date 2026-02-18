@@ -15,18 +15,14 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
 
-# Actuator for monitoring
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
+  kafka:
+    bootstrap-servers: ec2-3-108-252-252.ap-south-1.compute.amazonaws.com:9092
+    consumer:
+      group-id: balance-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
 
-# Eureka instance details
-eureka:
-  instance:
-    instance-id: ${spring.application.name}:${random.value}
