@@ -1,7 +1,7 @@
 pipeline {
 agent { label 'java-node' }
 
-```
+
 tools {
     jdk 'java17'
     maven 'maven-3'
@@ -74,6 +74,6 @@ post {
         echo "Pipeline failed. Please check Jenkins logs."
     }
 }
-```
+
 
 }
