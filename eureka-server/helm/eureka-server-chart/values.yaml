@@ -1,0 +1,14 @@
+replicaCount: 1
+
+image:
+repository: rishikumarandugala/state-bank-eureka-server
+tag: latest
+pullPolicy: Always
+
+service:
+type: ClusterIP
+port: 8761
+
+container:
+port: 8761
+
